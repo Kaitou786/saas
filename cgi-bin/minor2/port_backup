@@ -1,0 +1,33 @@
+#!/usr/bin/python36
+import subprocess as sp
+
+
+
+class Port:
+	ports=""
+	usedPorts=[]
+	newPort=0
+	def __init__(self):
+		self.ports=sp.getoutput("sudo netstat -tunlep | grep LISTEN | awk '{print $4}' ")
+		self.ports = self.ports.split("\n")
+		self.usedPorts=[]
+		self.newPort=0
+	def getUsedPorts(self):
+		for i in self.ports:
+			self.usedPorts.append(int(i.split(":")[-1]))
+		return self.usedPorts	
+	def getNewPort(self):
+		self.usedPorts=self.getUsedPorts()
+		for i in range(1024,65535):
+			if i not in self.usedPorts:
+				self.newPort=i
+				return self.newPort
+				break
+			i=i+1
+
+#test.getUsedPorts()
+#clientName=input("enter client name: ")
+
+#print(sp.getoutput("docker run -dit --name {} -p {}:3333  xpra_vlc:v4".format(clientName,newPort)))
+#print(newPort)
+#print("website is available at http://192.168.56.101:{}".format(newPort))

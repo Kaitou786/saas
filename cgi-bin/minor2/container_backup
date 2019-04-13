@@ -1,0 +1,10 @@
+#!/usr/bin/python36
+
+import subprocess as sp
+from port import Port
+class Container:
+	port=Port()
+	newPort=port.getNewPort()
+	def createContainer(self):
+		sp.getoutput("sudo docker run -dit -p {}:3333  xpra_vlc:v4".format(self.newPort))
+		return self.newPort

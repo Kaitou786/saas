@@ -1,0 +1,25 @@
+#!/usr/bin/python36
+import cgi
+import cgitb
+cgitb.enable()
+print("content-type:text/html")
+print("\n")
+
+from container import Container
+from port import Port
+import subprocess as sp
+
+
+class URL:
+	url=""
+	def getUrl(self):
+		test=Container()
+		newPort=test.createContainer()
+		print(newPort)
+		self.url="http://192.168.56.101:"+str(newPort)
+		return self.url
+
+#test=URL()
+#print("location:{}".format(test.getUrl()))
+print("\n")
+print("hi")

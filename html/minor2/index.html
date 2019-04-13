@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Software as a Service</title>
+    
+      <link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript">
+		function validateForm() {
+		    
+			var x = document.forms["register"]["email"].value;
+			
+			var atpos = x.indexOf("@");
+			var dotpos = x.lastIndexOf(".");
+			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+				alert("Not a valid e-mail address");
+				return false;
+			}
+			
+			var name = document.forms["register"]["fullname"].value;
+			var patt= /^[a-zA-Z\s]*$/
+			
+			var result=patt.test(name);
+			
+			if (name==null || name=="" || name==" "){  
+				alert("Name can't be blank");  
+				return false;  
+			}
+			else if (!result) {
+				alert('One or more illegal characters were found in the name field');
+				return false
+			}
+			
+			var pwd = document.forms["register"]["password"].value;
+			if (pwd.length<8){  
+				alert("Password must be at least 8 characters long.");  
+				return false;  
+			}
+			var phn = document.forms["register"]["phoneno"].value;
+			var pat=/^[2-9]{2}\d{8}$/
+			var res=pat.test(phn);
+			if (phn.length<10){  
+				alert("Enter valid Phone No.");  
+				return false;  
+			}  
+			else if(!result)
+			{
+				alert("Enter valid Phone No.");  
+				return false;	
+			}
+		}
+		
+		function validateLogin() {
+		
+			var x = document.forms["login"]["user"].value;
+			
+			var atpos = x.indexOf("@");
+			var dotpos = x.lastIndexOf(".");
+			if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+				alert("Not a valid e-mail address");
+				return false;
+			}
+
+			var pwd = document.forms["login"]["password"].value;
+			if (pwd==null || pwd=="" || pwd==" "){  
+				alert("Password required!");  
+				return false;  
+			}
+			
+			localStorage.setItem("emailid",x)
+		
+		}
+		
+		
+	</script> 
+
+  
+</head>
+
+<body>
+
+  <script  src="https://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" ></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div class="body">
+		<div class="veen">
+			<div class="login-btn splits">
+				<p>Already an user?</p>
+				<button class="active">Login</button>
+			</div>
+			<div class="rgstr-btn splits">
+				<p>Don't have an account?</p>
+				<button>Register</button>
+			</div>
+			<div class="wrapper">
+				<form action="../../cgi-bin/minor2/loginSubmission.py" id="login" tabindex="500" method="post" onsubmit="return validateLogin();" >
+					<h3>Login</h3>
+					<div class="mail">
+						<input type="mail" name="user">
+						<label>Mail or Username</label>
+					</div>
+					<div class="passwd">
+						<input type="password" name="password">
+						<label>Password</label>
+					</div>
+					<div class="submit">
+						<button type="submit" class="dark"> Login </button>
+						
+					</div>
+				</form>
+				<form action="../../cgi-bin/minor2/registration.py" id="register" tabindex="502" method="post" onsubmit="return validateForm();">
+					<h3>Register</h3>
+					<div class="name">
+						<input type="text" name="fullname">
+						<label>Full Name</label>
+					</div>
+					<div class="mail">
+						<input type="text" name="email">
+						<label>Mail</label>
+					</div>
+					<div class="phoneno">
+						<input type="text" name="phoneno">
+						<label>Contact No.</label>
+					</div>
+					
+					<div class="passwd">
+						<input type="password" name="password">
+						<label>Password</label>
+					</div>
+					<div class="submit">
+						<button type="submit" class="dark">Register</button>
+					</div>
+				</form>
+			</div>
+		</div>	
+	</div>
+
+<div class="site-link">
+		
+			Minor 2 
+	</div>
+	<style type="text/css">
+		.site-link{
+      padding: 5px 15px;
+			position: fixed;
+			z-index: 99999;
+			background: #fff;
+			box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+			right: 30px;
+			bottom: 30px;
+			border-radius: 10px;
+		}
+		.site-link img{
+			width: 30px;
+			height: 30px;
+		}
+	</style>
+  
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
